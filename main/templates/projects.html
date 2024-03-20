@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="project">
+    <h2> Renova </h2>
+
+    <p>Mobile app that brings simple interior design to your pockets. Users can use the app to render quick 3D scans of their room. They then can modify the furniture, color, and layout of their room right on their phones.</p>
+    <p>
+        <a class="project-link" href="https://renova.space" target="_blank"><img class="link" src="{% static 'link.png' %}"> View Website</a> 
+    </p>
+    <span class="skill"> Swift </span> <span class="skill"> AWS </span> <span class="skill"> UI </span> <span class="skill"> UX </span>
+</div>
+
+<div class="project">
+    <h2> bit.mortgage </h2>
+
+    <p> Mortgage calculator </p>
+    <p>
+        <a class="project-link" href="https://github.com/Justinzh0905/bit.mortgage" target="_blank"><img class="link" src="{% static 'link.png' %}"> View GitHub</a> 
+    </p>
+    <span class="skill"> Swift </span> <span class="skill"> Python </span>
+</div>
+
+<div class="project">
+    <h2> Fantasy Football Database </h2>
+
+    <p> coming soon </p>
+    <p>
+        <a class="project-link" href="https://github.com/Justinzh0905/FantasyFootball" target="_blank"><img class="link" src="{% static 'link.png' %}"> View GitHub</a> 
+    </p>
+    <span class="skill"> Python </span> <span class="skill"> NumPy </span> <span class="skill"> Pandas </span> <span class="skill"> Matplotlib </span> 
+</div>
+{% endblock %}

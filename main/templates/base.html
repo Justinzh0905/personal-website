@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title> {{ title }} </title>
+        <link href="{% static 'style.css' %}" rel="stylesheet">
+        <link type="image/png" sizes="96x96" rel="icon" href="{% static 'star.png' %}">
+
+        <meta name="author" content="Justin Zhai">
+        <meta name="keywords" content="Justin Zhai, SWE">
+        <meta name="description" content="Justin Zhai's personal website">
+    </head>
+
+    <body>
+        <div class="container">
+            <nav>
+                <div class="link-container">
+                    <a class="link" href="{% url 'home' %}"> HOME</a>
+                </div>
+                <div class="link-container">
+                    <a class="link" href="{% url 'projects' %}"> PROJECTS</a>
+                </div>
+                <div class="link-container">
+                    <a class="link" href="{% url 'pitches' %}"> PITCHES</a>
+                </div>
+            </nav>
+            <h1> {{ title }}</h1>
+
+            {% block main %} {% endblock %}
+
+
+
+            <div class="container">
+                <span class="connect">Let's talk!</span>
+                <div class="footer">
+                    <a href="https://github.com/justinzh0905">
+                        <img class="logo" src="{% static 'githubLogo.png' %}">
+                    </a>
+                    <a href="https://linkedin.com/in/justinzhai">
+                        <img class="logo" src="{% static 'linkedinLogo.png' %}">
+                    </a>
+                    <a href="mailto:justinzh0905@gmail.com">
+                        <img class="logo" src="{% static 'mailLogo.png' %}">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
