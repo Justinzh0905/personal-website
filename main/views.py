@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from main.models import Stock, Resource
 import yfinance as yf
 import datetime
+from . import chart
 # Create your views here.
 
 def home(request):
@@ -30,7 +31,7 @@ def pitches(request):
         annualized = round(((price/stock_model.pprice)**(1/difference_in_years)-1)*100,2)
         pe = round(stock.info['trailingPE'],2)
         beta = round(stock.info['beta'],2)
-        marketcap = str(round(stock.info['marketCap'] // 1000000000, 2)) + 'B'
+        marketcap = format(round(stock.info['marketCap'] / 1000000000, 2), ',') 
 
         partners = [{'name': partner.name, 'linkedin': partner.linkedin} for partner in stock_model.partners.all()]
         resources = [{'type': resource.type, 'url': resource.url} for resource in Resource.objects.filter(stock=stock_model)]

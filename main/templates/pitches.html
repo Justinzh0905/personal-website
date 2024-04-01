@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load plotly_dash %}
+{% plotly_header %}
 {% block main %}
-<p> Here are my pitches</p>
 
+<div class="plot">
+    {% plotly_direct name='chart' %}
+</div>
+<p> Here are my pitches</p>
 {% for stock in stocks %}
     <div class="project">
         <div class="pitch">
@@ -14,7 +19,7 @@
                 <table class="metrics">
                     <thead>
                         <tr>
-                            <th> Ticker</th><th>Current Price</th> <th> Market Cap</th><th> Beta</th> <th> P/E </th> <th>Price at Pitch</th> <th> Change (%)</th> <th> Annualized Returns (%)</th>
+                            <th> Ticker</th><th>Current Price</th> <th> Market Cap ($Bn)</th><th> Beta</th> <th> P/E </th> <th>Price at Pitch</th> <th> Change (%)</th> <th> Annualized Returns (%)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,5 +47,6 @@
         </div>
     </div>
 {% endfor %}
+{% plotly_footer %}
 <script src="{% static 'expand.js' %}" defer></script>
 {% endblock %}

@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('topsecret/', admin.site.urls),
-    path('', include('main.urls'))
+    path('', include('main.urls')),
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
