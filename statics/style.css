@@ -120,6 +120,7 @@ a.project-link {
     color: white;
     background-color: rgb(19,41,75);
     margin-bottom: 2rem;
+    margin-right: 1rem;
 }
 
 a.project-link:hover {
@@ -134,7 +135,6 @@ img.link {
 .arrow {
     height: 100%;
     object-fit: contain;
-    transform: scaleY(1);
 }
 
 .expand {
@@ -156,4 +156,25 @@ div.pitch {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+img.portrait {
+    height: 30rem;
+    width: auto;
+    border: 0.75rem solid rgb(75,156,211);
+    border-radius: 20px;
+}
+
+p.date {
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.metrics {
+    text-align: right;
+    border-spacing: 1.2rem;
+}
+
+th {
+    border-bottom: 0.1rem solid white;
 }

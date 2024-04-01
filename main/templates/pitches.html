@@ -3,64 +3,44 @@
 {% block main %}
 <p> Here are my pitches</p>
 
-<div class="project">
-    <div class="pitch">
-        <h2 class="pitch-title"> Uber </h2>
-        <button class="expand-button" onclick="expand(this)" id="1"><img class="arrow" id="arrow1" src="{% static 'expand.png' %}"></button>
+{% for stock in stocks %}
+    <div class="project">
+        <div class="pitch">
+            <h2 class="pitch-title"> {{stock.name}} </h2>
+            <button class="expand-button" onclick="expand(this)" id="{{forloop.counter}}"><img class="arrow" id="arrow{{forloop.counter}}" style="transform: ScaleY(1)" src="{% static 'expand.png' %}"></button>
+        </div>
+        <div class="expand" style="display: none" id="div{{forloop.counter}}"> 
+            <h3> Metrics</h3>
+                <table class="metrics">
+                    <thead>
+                        <tr>
+                            <th> Ticker</th><th>Current Price</th> <th> Market Cap</th><th> Beta</th> <th> P/E </th> <th>Price at Pitch</th> <th> Change (%)</th> <th> Annualized Returns (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{stock.ticker}}</td><td>{{stock.price}}</td> <td> {{stock.marketcap}}</td><td> {{stock.beta}}</td> <td>{{stock.pe}} </td> <td> {{stock.pprice}}</td><td> {{stock.change}}</td> <td>{{stock.annualized}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <h3> Overview</h3>
+            {{stock.description}}
+            <br> 
+            {% if stock.resources %}
+                <h3> Pitch Material </h3>
+                {% for resource in stock.resources %}
+                <a class="project-link" href="{{resource.url}}" target="_blank"><img class="link" src="{% static 'link.png' %}"> {{resource.type}} </a> 
+            {% endfor %}
+            {% endif %}
+            {% if stock.partners %}
+                <h3> In Collaboration with: </h3>
+                {% for partner in stock.partners %}
+                    <a class="project-link" href="{{partner.linkedin}}" target="_blank"><img class="link" src="{% static 'link.png' %}"> {{partner.name}} </a> 
+                {% endfor %}
+            {% endif %}
+            <p class="date">Pitched on {{stock.date}} </p>
+        </div>
     </div>
-    <div class="expand" id="div1"> 
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-        sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-        recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
-        minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
-        quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
-        fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
-        consequuntur! Commodi minima excepturi repudiandae velit hic maxime
-        doloremque. Quaerat provident commodi consectetur veniam similique ad 
-        earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo 
-        fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore 
-        suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
-        modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam 
-        totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
-        quasi aliquam eligendi, placeat qui corporis! </div>
-</div>
-
-
-<div class="project">
-    <div class="pitch">
-        <h2 class="pitch-title"> Google </h2>
-        <button class="expand-button" onclick="expand(this)" id="2"><img class="arrow" id="arrow2" src="{% static 'expand.png' %}"></button>
-    </div>
-    <div class="expand" id="div2"> 
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-        sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-        recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
-        minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
-        quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
-        fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
-        consequuntur! Commodi minima excepturi repudiandae velit hic maxime
-        doloremque. Quaerat provident commodi consectetur veniam similique ad 
-        earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo 
-        fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore 
-        suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
-        modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam 
-        totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
-        quasi aliquam eligendi, placeat qui corporis! </div>
-</div>
-
+{% endfor %}
 <script src="{% static 'expand.js' %}" defer></script>
 {% endblock %}
