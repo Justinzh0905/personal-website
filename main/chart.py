@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, callback, Output, Input
+from dash import html, dcc, Output, Input
 import pandas as pd
 import numpy as np
 import pandas_datareader as pdr
@@ -7,11 +7,17 @@ from datetime import date, timedelta
 import statsmodels.api as sm
 import plotly.express as px
 import scipy.optimize as sco 
+from scipy import stats
 from django_plotly_dash import DjangoDash
 from main.models import Stock
 
 yf.pdr_override()
-
+'''
+TODO: 
+Check math returns are off
+Geometric mean for returns
+Display optimal portfolio. Pie chart perhaps?
+'''
 #use 1wk or 1mo
 interval = '1wk'
 
@@ -25,7 +31,6 @@ start = date.today() - timedelta(days=365*5)
 data = {ticker: yf.download(ticker, start=start, interval=interval)['Adj Close'] for ticker in tickers}
 
 data = pd.concat(data, axis=1).dropna().pct_change()
-
 rf = pdr.DataReader('DGS10', 'fred', start)['DGS10']
 rf = rf[rf.index.isin(data.index)] / 100
 rf = np.log(1+rf)/52
@@ -43,12 +48,16 @@ for ticker in tickers:
 
 betas = pd.Series(betas)
 
-returns = {ticker: (betas[ticker] * data['SPY Excess'].mean() + rf.mean()) for ticker in tickers }
-
+market_return = stats.gmean(data['SPY Excess'].apply(lambda x: x + 1)) - 1
+CAPM_returns = pd.Series([(betas[ticker] * market_return + rf.mean()) for ticker in tickers[1:]])
+CAPM_returns.index = tickers[1:]
 stocks = data[tickers[1:]]
+mean_returns = pd.Series(stats.gmean(stocks.apply(lambda x: x + 1)) - 1)
+mean_returns.index = tickers[1:]
+print(mean_returns)
 
 def portfolio_annualised_performance(weights, expected_returns, cov_matrix):
-    returns = (np.sum(expected_returns*weights ) + 1) ** multiple - 1
+    returns = np.sum(expected_returns*weights ) * multiple
     std = np.sqrt(np.dot(weights.T @ cov_matrix, weights))[0] * np.sqrt(multiple)
     return std, returns
 
@@ -69,10 +78,6 @@ def simulated_ef_with_random(mean_returns, cov_matrix, num_portfolios, risk_free
     df.columns = ['Standard Deviation', 'Expected Returns', f'{ratio} Ratio']
     return df
 
-def neg_ratio(weights, returns, cov, rf):
-    std, expected_return = portfolio_annualised_performance(weights, returns, cov)
-    return -1* (expected_return - rf)/std
-
 def portfolio_volatility(weights, cov_matrix):
     return np.sqrt(weights.T @ cov_matrix @ weights) * np.sqrt(multiple)
 
@@ -81,7 +86,7 @@ def efficient_return(expected_returns, cov_matrix, target):
     args = (cov_matrix)
 
     def portfolio_return(weights):
-        return (np.sum(expected_returns*weights ) + 1) ** multiple - 1
+        return np.sum(expected_returns*weights) * multiple
 
     constraints = ({'type': 'eq', 'fun': lambda x: portfolio_return(x) - target},
                    {'type': 'eq', 'fun': lambda x: np.sum(x) - 1})
@@ -101,8 +106,6 @@ def efficient_frontier(mean_returns, cov_matrix, returns_range, rf, ratio='sharp
     df[f'{ratio} Ratio'] = (df['Expected Returns'] - rf) / df['Standard Deviation']
     return df.round(5)
 
-returns = pd.Series(list(returns.values())[1:])
-returns.index = tickers[1:]
 
 def semivar(stock1, stock2, rf):
     sum = 0
@@ -117,7 +120,7 @@ def semicovar(stocks, rf):
 app = DjangoDash('chart')
 
 app.layout = html.Div([
-    dcc.Dropdown(['Sharpe', 'Sortino'], 'Sharpe', id='ratio-select'),
+    dcc.Dropdown(['Sharpe (CAPM)', 'Sortino (CAPM)', 'Sharpe (Historical Returns)', 'Sortino (Historical Returns)'], 'Sharpe (CAPM)', id='ratio-select'),
     dcc.Graph(figure={}, id="frontier-graph")
 ], style={'margin-inline': '5%'})
 
@@ -129,17 +132,24 @@ graphing_mode = 'optimize'
     Input(component_id='ratio-select', component_property='value')
 )
 def update_graph(ratio):
+    args = ratio.split()
+    ratio = args[0]
     if ratio == 'Sharpe':
         cov = stocks.cov()
     else:
         cov = semicovar(stocks, rf)
     
+    if args[-1] == '(CAPM)':
+        returns = CAPM_returns
+    else:
+        returns = mean_returns
     df = None
     if graphing_mode =='optimize':
-        returns_range = (1 + np.linspace(returns.min(), returns.max(), num=150))**multiple - 1
+        returns_range = (np.linspace(returns.min(), returns.max(), num=150)) * multiple
         df = efficient_frontier(returns, cov, returns_range, rf.mean(), ratio)
     elif graphing_mode =='random':
         df = simulated_ef_with_random(returns, cov, 3000, rf.mean(), ratio)
+
     fig = px.scatter(df, x='Standard Deviation', y='Expected Returns', color=f'{ratio} Ratio')
 
     max_ratio = df[f'{ratio} Ratio'].idxmax()

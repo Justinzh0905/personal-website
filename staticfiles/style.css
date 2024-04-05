@@ -178,3 +178,16 @@ p.date {
 th {
     border-bottom: 0.1rem solid white;
 }
+
+.current {
+    background-color: rgb(75,156,211);
+    padding: 0.5rem;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+}
+
+div.book-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
