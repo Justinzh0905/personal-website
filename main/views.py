@@ -9,7 +9,7 @@ from . import chart
 def home(request):
     context = {
         'title': 'Home',
-        'isbn': 1264269803,
+        'isbn': 9781665954884,
     }
     return render(request, 'home.html', context)
 

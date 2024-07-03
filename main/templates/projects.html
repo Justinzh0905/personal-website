@@ -3,37 +3,65 @@
 {% block main %}
 
 <div class="project">
-    <h2> Renova </h2>
+    <div class="project-info">
+        <h2> Renova </h2>
 
-    <p>Mobile app that brings simple interior design to your pockets. Users can use the app to render quick 3D scans of their room. They then can modify the furniture, color, and layout of their room right on their phones.</p>
-    <p>
-        <a class="project-link" href="https://renova.space" target="_blank"><img class="link" src="{% static 'link.png' %}"> View Website</a> 
-    </p>
-    <span class="skill"> Swift </span> <span class="skill"> AWS </span> <span class="skill"> UI </span> <span class="skill"> UX </span>
+        <p>Mobile app that brings simple interior design to your pockets. Users can use the app to render quick 3D scans of their room. They then can modify the furniture, color, and layout of their room right on their phones.</p>
+        <p>
+            <a class="project-link" href="https://renova.space" target="_blank"><img class="link" src="{% static 'link.png' %}"> View Website</a> 
+        </p>
+        <div class="skill-section">
+            <span class="skill"> Swift </span> <span class="skill"> AWS </span> <span class="skill"> UI </span> <span class="skill"> UX </span>
+        </div>
+    </div>
+    <div class="project-gallery-horizontal">
+        <img class="project-image-vertical" src="{% static 'scan2.png' %}" >       
+        <img class="project-image-vertical" src="{% static 'scan1.png' %}" > 
+    </div>
 </div>
 
 <div class="project">
-    <h2> bit.mortgage </h2>
+    <div class="project-info">
+        <h2> Fantasy Football </h2>
 
-    <p> Calculator to help users find the mortgage they can afford based on their income and credit score range. 
-        Includes feature to compare your budget with average price in your area utilizing Zillow average housing price data from 26,000+ zip codes. </p>
+        <p> An analytics and visual comparison tool for Fantasy Football draft research. Includes custom draft rankings based on historical value over replacement performance, expert opinion, and real time draft trends. </p>
 
-    <p> Redesign using React + feature to specify 15 or 30 year mortgage, custom downpayment, and more coming Summer 2024 </p>
-    <p>
-        <a class="project-link" href="https://github.com/Justinzh0905/bit.mortgage" target="_blank"><img class="link" src="{% static 'link.png' %}"> View GitHub</a> 
-    </p>
-    <span class="skill"> Swift </span> <span class="skill"> Python </span>
+        <p> Fullstack application built using JavaScript and Python. Frontend is built using React and customized with MUI. Backend is deployed via AWS using Lambda, API Gateway and DynamoDB.  </p>
+        <p>
+            <a class="project-link" href="https://football.justin-zhai.com" target="_blank"><img class="link" src="{% static 'link.png' %}"> View Website</a> 
+            <a class="project-link" href="https://github.com/Justinzh0905/FantasyFootball" target="_blank"><img class="link" src="{% static 'link.png' %}"> View GitHub</a> 
+        </p>
+        <div class="skill-section">
+            <span class="skill"> Python </span> <span class="skill"> JavaScript </span> <span class="skill"> React </span> <span class="skill"> AWS </span> <span class="skill"> Pandas </span> <span class="skill"> DynamoDB </span>  
+        </div>
+    </div>
+    <div class="project-gallery-vertical">
+        <img class="project-image-horizontal" src="{% static 'graph.png' %}" > 
+        <img class="project-image-horizontal" src="{% static 'rankings.png' %}" > 
+    </div>
 </div>
+
 
 <div class="project">
-    <h2> Fantasy Football Database </h2>
+    <div class="project-info"> 
+        <h2> bit.mortgage </h2>
 
-    <p> An analytics and visual comparison tool for Fantasy Football draft research. Includes custom draft rankings based on historical value over replacement performance and expert opinion.</p>
+        <p> Calculator to help users find the mortgage they can afford based on their income and credit score range. 
+            Includes feature to compare your budget with average price in your area utilizing Zillow average housing price data from 26,000+ zip codes. </p>
 
-    <p> Updated data and expert rankings + web version will be released prior to start of 2024 season. </p>
-    <p>
-        <a class="project-link" href="https://github.com/Justinzh0905/FantasyFootball" target="_blank"><img class="link" src="{% static 'link.png' %}"> View GitHub</a> 
-    </p>
-    <span class="skill"> Python </span> <span class="skill"> NumPy </span> <span class="skill"> Pandas </span> <span class="skill"> Matplotlib </span> 
+        <p> Redesign using React + feature to specify 15 or 30 year mortgage, custom downpayment, and more coming towards the end of 2024. </p>
+        <p>
+            <a class="project-link" href="https://www.youtube.com/watch?v=5AdFgzyDgQY&t=2s" target="_blank"><img class="link" src="{% static 'link.png' %}"> View YouTube Demo </a> 
+            <a class="project-link" href="//github.com/Justinzh0905/bit.mortgage" target="_blank"><img class="link" src="{% static 'link.png' %}"> View GitHub</a> 
+        </p>
+        <div class="skill-section">
+        <span class="skill"> Swift </span> <span class="skill"> Python </span>
+        </div>
+    </div>
+    <div class="project-gallery-horizontal">
+        <img class="project-image-vertical" src="{% static 'mortgage1.png' %}" > 
+        <img class="project-image-vertical" src="{% static 'mortgage2.png' %}" > 
+    </div>
 </div>
+
 {% endblock %}

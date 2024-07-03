@@ -16,18 +16,20 @@
         </div>
         <div class="expand" style="display: none" id="div{{forloop.counter}}"> 
             <h3> Metrics</h3>
-                <table class="metrics">
-                    <thead>
-                        <tr>
-                            <th> Ticker</th><th>Current Price</th> <th> Market Cap ($Bn)</th><th> Beta</th> <th> P/E </th> <th>Price at Pitch</th> <th> Change (%)</th> <th> Annualized Returns (%)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{stock.ticker}}</td><td>{{stock.price}}</td> <td> {{stock.marketcap}}</td><td> {{stock.beta}}</td> <td>{{stock.pe}} </td> <td> {{stock.pprice}}</td><td> {{stock.change}}</td> <td>{{stock.annualized}} </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table">
+                    <table class="metrics">
+                        <thead>
+                            <tr>
+                                <th> Ticker</th><th>Current Price</th> <th> Market Cap ($Bn)</th><th> Beta</th> <th> P/E </th> <th>Price at Pitch</th> <th> Change (%)</th> <th> Annualized Returns (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{stock.ticker}}</td><td>{{stock.price}}</td> <td> {{stock.marketcap}}</td><td> {{stock.beta}}</td> <td>{{stock.pe}} </td> <td> {{stock.pprice}}</td><td> {{stock.change}}</td> <td>{{stock.annualized}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             <h3> Overview</h3>
             {{stock.description}}
             <br> 

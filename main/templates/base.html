@@ -10,23 +10,19 @@
         <meta name="author" content="Justin Zhai">
         <meta name="keywords" content="Justin Zhai, SWE">
         <meta name="description" content="Justin Zhai's personal website">
+        <meta name="viewport" content= "width=device-width, initial-scale=1.0">
     </head>
 
     <body>
-        <div class="container">
-            <nav>
-                <div class="link-container">
-                    <a class="link" href="{% url 'home' %}"> HOME</a>
-                </div>
-                <div class="link-container">
-                    <a class="link" href="{% url 'projects' %}"> PROJECTS</a>
-                </div>
-                <div class="link-container">
-                    <a class="link" href="{% url 'pitches' %}"> PITCHES</a>
-                </div>
-            </nav>
 
-            <h1 style="text-align: left;"> &nbsp; {{ title }}</h1>
+        <div class="main">
+            <div class="nav">
+                <ul>
+                    <li><a class="link" href="{% url 'home' %}"> HOME</a></li>
+                    <li><a class="link" href="{% url 'projects' %}"> PROJECTS</a></li>
+                    <li><a class="link" href="{% url 'pitches' %}"> PITCHES</a></li>
+                </ul>
+            </div>
             <br>
 
             {% block main %} {% endblock %}
@@ -36,13 +32,13 @@
             <div class="container">
                 <span class="connect">Let's talk!</span>
                 <div class="footer">
-                    <a href="https://github.com/justinzh0905">
+                    <a class="social" href="https://github.com/justinzh0905">
                         <img class="logo" src="{% static 'githubLogo.png' %}">
                     </a>
-                    <a href="https://linkedin.com/in/justinzhai">
+                    <a class="social" href="https://linkedin.com/in/justinzhai">
                         <img class="logo" src="{% static 'linkedinLogo.png' %}">
                     </a>
-                    <a href="mailto:justinzh0905@gmail.com">
+                    <a class="social" href="mailto:justinzh0905@gmail.com">
                         <img class="logo" src="{% static 'mailLogo.png' %}">
                     </a>
                 </div>

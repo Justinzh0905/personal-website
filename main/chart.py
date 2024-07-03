@@ -54,7 +54,6 @@ CAPM_returns.index = tickers[1:]
 stocks = data[tickers[1:]]
 mean_returns = pd.Series(stats.gmean(stocks.apply(lambda x: x + 1)) - 1)
 mean_returns.index = tickers[1:]
-print(mean_returns)
 
 def portfolio_annualised_performance(weights, expected_returns, cov_matrix):
     returns = np.sum(expected_returns*weights ) * multiple
