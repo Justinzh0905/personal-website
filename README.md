@@ -1,4 +1,4 @@
-#Personal Website
+# Personal Website
 
 Check out the deployment: justin-zhai.com
 
