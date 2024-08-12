@@ -9,8 +9,8 @@
 </div>
 <p> Here are my pitches</p>
 {% for stock in stocks %}
-    <div class="project">
-        <div class="pitch">
+    <div class="pitch">
+        <div class="pitch-title">
             <h2 class="pitch-title"> {{stock.name}} </h2>
             <button class="expand-button" onclick="expand(this)" id="{{forloop.counter}}"><img class="arrow" id="arrow{{forloop.counter}}" style="transform: ScaleY(1)" src="{% static 'expand.png' %}"></button>
         </div>

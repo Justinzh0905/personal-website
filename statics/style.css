@@ -158,11 +158,21 @@ img.link {
     border: none;
 }
 
-.pitch-title {
+div.pitch {
+    text-align: left;
+    border-radius: 20px;
+    color: white;
+    background-color: rgb(75,156,211);
+    padding-inline: 5%;
+    padding-block: 3%;
+    margin: 5%;
+}
+
+h2.pitch-title {
     display: inline;
 }
 
-div.pitch {
+div.pitch-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
